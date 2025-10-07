@@ -1,0 +1,10 @@
+{
+    "data_dir": "C:/.../data/filtered_raw_dataset_1/",
+    "output_dir": "./results",
+    "websites": ["bbc.com", "elmundo.es", "orange.fr", "tiktok.com", "booking.com"],
+    "time_shifts": [1.2, 2.5, 3.8, 3.8],
+    "plot_generated_dataset": true,
+    "models": [["Hyperopt", "./../3. Model optimization/results/hyperopt/model.pkl"],
+               ["Base", "./../3. Model optimization/results/base/model.pkl"]],
+    "alpha_beta_pairs": [[0.20, 0.80], [0.10, 0.90], [0.01, 0.99]]
+  }

@@ -1,0 +1,11 @@
+{
+    "min_tasks": 4,
+    "max_tasks": 15,
+    "time_extension": 15,
+    "min_mixing": 0,
+    "max_mixing": 60,
+    "by_mixing": 10,
+    "max_iter": 30,
+    "seed": 1
+  }
+  
