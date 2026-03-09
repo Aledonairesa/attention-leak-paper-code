@@ -3,8 +3,10 @@
 This repository contains the scripts accompanying the paper:
 
 > **The Attention Leak: Behavioral Inference from Temporal Metadata in Network Traffic**  
-> By Alejandro Donaire and Carlos Borrego  
-> *Department of Information and Communications Engineering, Autonomous University of Barcelona (Barcelona, Spain)*
+> By Alejandro Donaire*, Carlos Borrego*, and Marc Juarez**
+> 
+> **Department of Information and Communications Engineering, Autonomous University of Barcelona (Barcelona, Spain)* \
+> ***School of Informatics, University of Edinburgh (Edinburgh, Scotland)*
 
 ---
 
