@@ -44,7 +44,8 @@ The script `test_functions.py` evaluates all the functions defined in `functions
 It produces:
 
 - A set of plots for each function  
-- A final summary with metrics for all functions  
+- A final summary with metrics for all functions
+- A CSV file with intermediate results.
 
 Example:
 
@@ -53,6 +54,13 @@ python test_functions.py
 ```
 
 You can also specify which functions to test using the `--functions` argument. By default, all functions are evaluated.
+
+## 4. Statistical significance tests
+The script `statistical_test.py` performs Steiger's Z-test on the most promising candidate functions (Main-IP, Start (10w), Start (4c)) using the pooled datasets (N=84). It uses the CSV file with the intermediate results, and can be executed as follows:
+
+```bash
+python statistical_test.py
+```
 
 
 
