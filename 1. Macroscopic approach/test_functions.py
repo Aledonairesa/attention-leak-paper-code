@@ -165,8 +165,8 @@ def plot_results_pro(
     by_mixing: int = MIX_STEP,
 ):
     """
-    2 x 4 grid, with 3 centered top plots and 4 bottom plots.
-    Uses task indices shifted by -1, bigger fonts, saves as SVG with “_pro”.
+    2 × 4 grid, with 3 centered top plots and 4 bottom plots.
+    Uses task indices shifted by −1, bigger fonts, saves as SVG with “_pro”.
     """
 
     # ------------------------------------------------------------------ #
@@ -267,6 +267,41 @@ def plot_results_pro(
     print(f"Saved professional plot: {out_path}")
 
 
+# ------------------------- INTERMEDIATE CSV ---------------------------
+def save_intermediate_csv(matrix, func_name, output_dir: Path,
+                          start_tasks: int = TASK_START,
+                          start_mixing: int = MIX_START,
+                          by_mixing: int = MIX_STEP):
+    """
+    Save the raw per-task / per-mixing-level values for one function.
+
+    Output shape (long format):
+        func_name | task_index | mixing_pct | value
+    """
+    arr = np.asarray(matrix)          # (n_tasks, n_mix)
+    n_tasks, n_mix = arr.shape
+
+    tasks   = np.arange(start_tasks, start_tasks + n_tasks)
+    mixings = [start_mixing + j * by_mixing for j in range(n_mix)]
+
+    rows = [
+        {
+            "func_name":  func_name,
+            "task_index": tasks[i],
+            "mixing_pct": mixings[j],
+            "value":      arr[i, j],
+        }
+        for i in range(n_tasks)
+        for j in range(n_mix)
+    ]
+
+    df = pd.DataFrame(rows)
+    out_path = output_dir / f"{func_name}_intermediate.csv"
+    df.to_csv(out_path, index=False)
+    print(f"Saved intermediate CSV: {out_path}")
+    return df
+
+
 # ------------------------------- MAIN ---------------------------------
 def extract_results(datasets, func):
     """Apply `func` to each dataset -> matrix[T][M]."""
@@ -318,6 +353,7 @@ def main():
                 }
 
     summaries = []
+    intermediate_frames = []
 
     for name in args.functions:
         func = func_map[name]
@@ -326,6 +362,18 @@ def main():
         plot_results(matrix, name, metrics, args.output_dir)
         plot_results_pro(matrix, name, metrics, args.output_dir)
         summaries.append(dict(algorithm=name, **metrics))
+
+        # Per-function intermediate CSV
+        df_inter = save_intermediate_csv(matrix, name, args.output_dir)
+        intermediate_frames.append(df_inter)
+
+    # Combined intermediate CSV
+    if intermediate_frames:
+        combined_path = args.output_dir / "all_intermediate_results.csv"
+        pd.concat(intermediate_frames, ignore_index=True).to_csv(
+            combined_path, index=False
+        )
+        print(f"Saved combined intermediate CSV -> {combined_path}")
 
     # Write CSV sorted by the new score
     df = (pd.DataFrame(summaries)
