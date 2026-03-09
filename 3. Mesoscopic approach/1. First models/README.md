@@ -45,3 +45,9 @@ This script:
 - Generates per-metric plots comparing models and feature sets across intervals  
 
 Outputs are stored in `metrics/combined_metrics/`.
+
+---
+
+## Statistical significance tests (`statistical_tests.py`)
+
+After running the main scripts, outputs can be further analyzed by running `statistical_tests.py`. This script is configured to perform Wilcoxon Signed-Rank Tests for MAE and Steiger's Z-tests for Pearson's _r_ to compare the best performing models (TCN and XGBoost at 5-s intervals with all features), but the `.pkl` files that are analyzed can be customized.
