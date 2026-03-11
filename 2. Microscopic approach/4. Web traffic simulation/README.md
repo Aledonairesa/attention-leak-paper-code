@@ -59,3 +59,9 @@ Plot the evolution of a specific metric for a given `alpha/beta` pair by specify
 ```bash
 python plot_global_results.py "./results" --alpha 0.02 --beta 0.98 --evolution_metric pair_f1
 ```
+
+---
+
+# Mitigation experiments
+
+The files `inject_mixed_df.py`, `config_injection.json`, and `untangle_tasks_injection.py` correspond to the mitigation experiments for this approach. To run them, first adjust the parameters as necessary in `config_injection.json`, then run `untangle_tasks_injection.py` as `untangle_tasks.py`. The results will be saved in the same manner.
