@@ -62,5 +62,11 @@ The script `statistical_test.py` performs Steiger's Z-test on the most promising
 python statistical_test.py
 ```
 
+## 5. Mitigation experiments
+To run the mitigation experiments on this approach, first run `inject_frames.py` to make the injections in the dataset (creating a new one), as follows:
 
+```bash
+python --input .\mixed_datasets.pkl --output .\mixed_datasets_injected_250.pkl --injections 250 --len-spread 3.0
+```
 
+Then, with this new injected dataset, run `test_functions.py` as usual, specifiying with the argument `--data-path` the path to the injected dataset. The results will be saved in the same manner.
